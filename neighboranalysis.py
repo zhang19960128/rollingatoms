@@ -1,4 +1,4 @@
-#!/bin/env python2
+#!usr/bin/env python2
 import numpy as np
 import math
 def wash(pointone,pointtwo,pb):
@@ -89,21 +89,11 @@ def varofpoint(index,raw,length):
         dataall[i][2]=wash(dataall[0][2],dataall[i][2],pz[i]);
     dataall=np.array(dataall);
     return [np.var(dataall[0:-1,0]),np.var(dataall[0:-1,1]),np.var(dataall[0:-1,2])]
-f=open("dump.xyz",'r');
 calist=open("cadata.txt","r");
 ca=[];
 for i in calist.readlines():
     ca.append(int(i));
-rawdata=f.readlines();
-length=len(rawdata);
-vall=[];
-for i in ca:
-    vall.append(varofpoint(i,rawdata,length));
-vall=np.array(vall);
-print str(np.mean(vall[:,0]))+" "+str(np.mean(vall[:,1]))+" "+str(np.mean(vall[:,2]));
-sum=0;
 for i in ca:
     nei=searchAone(i,10);
-    for j in nei:
-        re= j in ca;
-        sum=sum+re;
+    common=set(calist)-(set(calist)-set(nei));
+    print common
